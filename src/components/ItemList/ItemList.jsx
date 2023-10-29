@@ -1,4 +1,4 @@
-import {moneyFormat} from "../Utils/NumberUtils.js";
+import {moneyFormat} from "../../Utils/NumberUtils.js";
 
 const ItemList = ({ product }) => {
     return (

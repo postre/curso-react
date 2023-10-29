@@ -1,20 +1,18 @@
 
 import { useEffect, useState } from "react";
-import ItemList from "../../ItemList/ItemList";
-
+import ItemList from "../ItemList/ItemList";
+import { getProducts } from "../../services";
 
 const ItemListContainer = ({ greetings }) => {
 
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch('https://dummyjson.com/products?limit=60')
-            .then(res => res.json())
-            .then((prods) => {
-                setProducts(prods.products);
-            });
+        getProducts.then((products) => {
+            // console.log(products)
+            setProducts(products);
+        });            
     }, []);
-
 
 
     return (
