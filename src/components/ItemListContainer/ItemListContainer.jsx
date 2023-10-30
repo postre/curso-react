@@ -1,33 +1,29 @@
-
 import { useEffect, useState } from "react";
-import ItemList from "../ItemList/ItemList";
+import { ItemList } from "../ItemList/ItemList";
 import { getProducts } from "../../services";
+import { ProductAdapter } from "../../adapters";
+import { useParams } from "react-router-dom";
 
-const ItemListContainer = ({ greetings }) => {
+export const ItemListContainer = ({ greetings }) => {
+  const { categoryId } = useParams();
+  const [products, setProducts] = useState([]);
 
-    const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getProducts(categoryId).then((products) => {
+      setProducts(ProductAdapter.productsAdapted(products));
+    });
+  }, []);
 
-    useEffect(() => {
-        getProducts.then((products) => {
-            // console.log(products)
-            setProducts(products);
-        });            
-    }, []);
-
-
-    return (
-        <>
-
-            <div className="container mb-5">
-                <h3 className="mt-4">{greetings}</h3>
-                <div className="row cart">
-                    {products.map(product =>
-                        <ItemList product={product} key={product.id}/>
-                    )}
-                </div>
-            </div>
-            </>
-            )
-}
-
-            export default ItemListContainer
+  return (
+    <>
+      <div className="container mb-5">
+        <h3 className="mt-4">{categoryId}</h3>
+        <div className="row cart d-flex align-items-stretch">
+          {products.map((product) => (
+            <ItemList product={product} key={product.id} />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};

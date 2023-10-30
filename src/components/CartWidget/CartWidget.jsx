@@ -1,5 +1,4 @@
-
-const CartWidget = () => {
+export const CartWidget = () => {
 
     return (
         <>
@@ -10,5 +9,3 @@ const CartWidget = () => {
         </>
     )
 }
-
-export default CartWidget
