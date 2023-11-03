@@ -6,7 +6,7 @@ export const SliderItem = ({ greeting, index }) => {
         className={`carousel-item ${index == 0 ? "active" : ""}`}
       >
         <img
-          src={`./src/assets/img/${greeting.img}`}
+          src={greeting.img}
           className="d-block w-100"
           alt=""
         />
