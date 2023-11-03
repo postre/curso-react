@@ -2,6 +2,7 @@
   "name": "preentrega1-rodriguez-javier",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://postre.github.io/curso-react/docs",
   "type": "module",
   "scripts": {
     "dev": "vite",
