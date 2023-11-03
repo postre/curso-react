@@ -18,7 +18,7 @@ export const ItemListContainer = ({ greetings }) => {
 
   return (
     <>
-      <div className="container mb-5">
+      <div className="container">
         <Slider greetings={greetings} />
       </div>
 

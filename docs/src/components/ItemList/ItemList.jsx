@@ -3,7 +3,7 @@ import { moneyFormat } from "../../Utils/NumberUtils.js";
 export const ItemList = ({ product }) => {
   return (
     <>
-      <div className="col-md-4 mt-4">
+      <div className="col-md-4 mt-2">
         <div className="card mt-4 card-product h-100">
           <img src={product.thumbnail} className="img-fluid product-img" />
 
