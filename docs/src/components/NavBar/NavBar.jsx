@@ -11,13 +11,13 @@ export const NavBar = () => {
               className="d-flex align-items-center mb-2 mb-lg-0 me-2 text-white text-decoration-none"
             >
               <img
-                src="/src/assets/img/react.svg"
+                src="src/assets/img/react.svg"
                 className="animated-logo"
                 width="30"
               />
               <span className="mx-2 fw-bold">React Store</span>
               <img
-                src="/src/assets/img/react.svg"
+                src="src/assets/img/react.svg"
                 className="animated-logo"
                 width="30"
               />
