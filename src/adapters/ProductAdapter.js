@@ -1,4 +1,4 @@
-import {Product} from "../models/Product";
+import {Product} from "../models";
 
 export class ProductAdapter {
   static productAdapted(product) {
@@ -6,7 +6,7 @@ export class ProductAdapter {
   }
 
   static productsAdapted(products) {
-    return products.products.map(product => this.productAdapted(product));
+    return products.map(product => this.productAdapted(product));
   }
 }
 
