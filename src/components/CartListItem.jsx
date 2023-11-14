@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa6";
 import { NumberHelpers } from "../helpers";
 import { ItemListHandler } from "./ItemListHandler";
 
-export const CartListItem = ({ item, index, addToCart, deleteFromCart, addsItem, lessItem}) => {
+export const CartListItem = ({ item, index, addToCart, deleteFromCart, incrementItem, decrementItem}) => {
   const [count, setCount] = useState(item.quantity);
 
   const handleAddToCart = (item) => {
@@ -17,18 +17,18 @@ export const CartListItem = ({ item, index, addToCart, deleteFromCart, addsItem,
     deleteFromCart(item);
   };
 
-  const handleAddsItem = () => {
+  const handleIncrementItem = () => {
     setCount(count + 1);
-    addsItem(item);
+    incrementItem(item);
   };
-  const handleLessItem = () => {
+  const handleDecrementItem = () => {
     
     if (count-1==0) {
       handleDeleteFromCart(item);
       return;
     }
     setCount(count - 1);
-    lessItem(item)
+    decrementItem(item)
     
   };
 
@@ -40,7 +40,7 @@ export const CartListItem = ({ item, index, addToCart, deleteFromCart, addsItem,
         <b>{item.title}</b>
         <br />
         <small>
-          {item.brand} | {item.category}
+          {item.brand} | {item.category}<br />
         </small>
       </td>
       <td className="text-end">{NumberHelpers.moneyFormat(item.price)}</td>
@@ -51,8 +51,8 @@ export const CartListItem = ({ item, index, addToCart, deleteFromCart, addsItem,
               className=""
               deleteFromCart={handleDeleteFromCart}
               addToCart={null}
-              addsItem={handleAddsItem}
-              lessItem={handleLessItem}
+              incrementItem={handleIncrementItem}
+              decrementItem={handleDecrementItem}
               count={count}
               added={false}
               addButton={false}

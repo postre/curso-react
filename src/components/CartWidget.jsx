@@ -1,56 +1,76 @@
-import { FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping, FaTrash } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context";
 import { useContext } from "react";
 import { NumberHelpers } from "../helpers";
 
 export const CartWidget = () => {
-
-  const { cart } = useContext (CartContext)
-
-
+  const { cart, deleteFromCart } = useContext(CartContext);
 
   return (
-    
-      
-<>
+    <>
       <div className="dropdown">
-        <button type="button" className="btn btn-warning me-2" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button
+          type="button"
+          className="btn btn-warning me-2"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true" 
+          aria-expanded="false"
+        >
           <FaCartShopping className="me-3" />
           <span>{cart.items.length}</span>
         </button>
-        <div className="" aria-labelledby="dropdownMenuButton1">
-          <div className="dropdown-menu text-muted">
-              <div className="row p-2">
-                <div className="col-6 text-end"><small>Total:</small></div>
-                <div className="col-6">{NumberHelpers.moneyFormat(cart.total)}</div>
-              </div>
-      
-              <div className="row border-top mt-2">
-                {
-                  cart.items.map((item) => <div className="col-12" key={item.id}>
-                  {item.title}
-                </div>)
-                }
-                
-              </div>
 
+        <div
+          aria-labelledby="dropdownMenuButton1"
+          className="dropdown-menu p-0 cart-dropdown"
+          style={{ width: "400px" }}
+        >
+          <ul className="list-group row" role="menu">
+            
+            {cart.items.map((item) => (
+              <li key={item.id} className="list-group-item">
                 <div className="row">
-                  <div className="col-12">
-                    <Link to="/cart">
-                      <button className="btn btn-primary">
-                          ir al carro
-                      </button>
-                    </Link>
+                  <div className="col-10">
+                    <b>{item.title}</b>
+                    <br />
+                    {item.price}
+                  </div>
+                  <div className="col-2 text-end">
+                    <button className="btn btn-sm btn-danger">
+                      <FaTrash onClick={() => deleteFromCart(item)} />
+                    </button>
                   </div>
                 </div>
-              
-          </div>
-         
+              </li>
+            ))}
+
+            <li className="list-group-item">
+              <div className="row">
+
+                <div className="col-6 text-end"></div>
+                <div className="col-6 text-end">
+                  <b className="me-2">Subtotal:</b> {NumberHelpers.moneyFormat(cart.subtotal)}
+                  <br />
+                  <b className="me-2">IVA <small>({NumberHelpers.percentageFormat(cart.taxesPercentage)})</small>:</b> 
+                  {NumberHelpers.moneyFormat(cart.taxes)}
+                  <br />
+                  <b className="me-2">Envio:</b> {NumberHelpers.moneyFormat(cart.shippingCost)}
+                  <hr />
+                  <h5>{NumberHelpers.moneyFormat(cart.total)}</h5>
+                </div>
+
+              </div>
+            </li>
+            <li className="list-group-item">
+              <Link to="/cart">
+                <button className="btn btn-primary w-100">ir al carro</button>
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
-
-
     </>
   );
 };

@@ -111,3 +111,55 @@ header{
   margin-top: -50px;
 }
 
+
+.added-icon {
+  width: 60px;
+  height: 60px;
+  padding: 10px 5px;
+  border-radius: 60px;
+  background-color: #ffc107;
+  font-size: 24px;
+  text-align: center;
+
+  top:-30px;
+  right: 20px;
+  position: absolute;
+  z-index: 4;
+
+  animation: pop-in 0.2s ease;
+}
+
+.added-icon-out{
+  width: 60px;
+  height: 60px;
+  padding: 10px 5px;
+  border-radius: 60px;
+  background-color: #ffc107;
+  font-size: 24px;
+  text-align: center;
+
+  top:-30px;
+  right: 20px;
+  position: absolute;
+  z-index: 4;
+  transform:scale(0);
+  animation: pop-out 0.2s ease;
+}
+
+.item-list{
+  position: relative;
+}
+
+
+@keyframes pop-in {
+  from{transform:scale(0)}
+  80%{transform:scale(1.2)}
+  to{transform:scale(1)}
+}
+
+@keyframes pop-out {
+  from{transform:scale(1)}
+  to{transform:scale(0);}
+}
+
+

@@ -5,8 +5,7 @@ import { NumberHelpers } from "../helpers";
 
 
 export const CartListContainer = () => {
-  const {cart, addToCart, deleteFromCart, addsItem, lessItem } = useContext(CartContext);
-
+  const {cart, addToCart, deleteFromCart, incrementItem, decrementItem } = useContext(CartContext);
 
   return (
     <>
@@ -30,9 +29,8 @@ export const CartListContainer = () => {
                 item={item} 
                 addToCart={addToCart} 
                 deleteFromCart={deleteFromCart}
-                addsItem={addsItem}
-                lessItem={lessItem}
-               
+                incrementItem={incrementItem}
+                decrementItem={decrementItem}
               />
           ))}
         </tbody>

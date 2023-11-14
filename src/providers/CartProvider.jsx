@@ -163,28 +163,32 @@ export const CartProvider = ({ children }) => {
     dispatch(action);
   };
 
-  const deleteFromCart = (id) => {
+  const deleteFromCart = (product) => {
     const action = {
       type: "[CART] deleteFromCart",
-      payload: id,
+      payload: product,
     };
     dispatch(action);
   };
 
-  const addsItem = (id) => {
+  const incrementItem = (product) => {
     const action = {
       type: "[CART] addsCartItem",
-      payload: id,
+      payload: product,
     };
     dispatch(action);
   };
-  const lessItem = (id) => {
+  const decrementItem = (product) => {
     const action = {
       type: "[CART] lessCartItem",
-      payload: id,
+      payload: product,
     };
     dispatch(action);
   };
+
+  const isInCart = (id) => { 
+     return cart.items.find((item) => item.id===id) ;
+  }
 
   const [cart, dispatch] = useReducer(cartReducer, initialState);
 
@@ -194,7 +198,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, deleteFromCart, addsItem, lessItem }}>
+    <CartContext.Provider value={{ cart, addToCart, deleteFromCart, incrementItem, decrementItem, isInCart }}>
       {children}
     </CartContext.Provider>
   );

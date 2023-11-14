@@ -1,43 +1,57 @@
-import { NumberHelpers } from "../helpers";
-import { ItemListHandler } from "../components";
 import { useContext, useEffect, useState } from "react";
+import { ItemListHandler } from "../components";
 import { CartContext } from "../context";
+import { NumberHelpers } from "../helpers";
+import { FaCartShopping } from "react-icons/fa6";
 
 export const ItemList = ({ product }) => {
-  const { cart, addToCart, deleteFromCart } = useContext(CartContext);
-  const [added, setAdded] = useState(false);
+  const { cart, addToCart, deleteFromCart, isInCart } = useContext(CartContext);
+  const [inCart, setInCart] = useState(undefined);
   const [count, setCount] = useState(0);
 
+
   const handleAddToCart = () => {
-    if (count == 0) {
+    if (count === 0) {
       handleDeleteFromCart();
       return;
     }
-    setAdded(true);
+
     addToCart(product, count);
   };
   const handleDeleteFromCart = () => {
-    setAdded(false);
-    deleteFromCart(product.id);
+    deleteFromCart(product);
   };
 
-  const addsItem = () => {
+  const incrementItem = () => {
     setCount(count + 1);
   };
-  const lessItem = () => {
+
+  const decrementItem = () => {
     if (count < 1) return;
     setCount(count - 1);
   };
 
-
+  useEffect(() => {
+      const isIncart = isInCart(product.id);
+      setInCart(isIncart);
+      setCount(isIncart ? isIncart.quantity : 0);
+  }, [cart])
+  
 
   return (
     <>
-      <div className="col-md-4 mt-4">
+      <div className="col-md-4 mt-4 ">
+
+      
         <div className="card card-product h-100">
           <img src={product.thumbnail} className="img-fluid product-img" />
 
-          <div className="card-body border-top">
+          <div className="card-body border-top item-list">
+
+                <div className={inCart ? 'added-icon' : 'added-icon-out' } >
+                  <FaCartShopping />
+                </div>
+  
             <small>{product.category}</small>
             <h5 className="card-title">{product.title}</h5>
             {/* <p>{brand}</p> */}
@@ -54,10 +68,10 @@ export const ItemList = ({ product }) => {
                 <ItemListHandler
                   deleteFromCart={handleDeleteFromCart}
                   addToCart={handleAddToCart}
-                  addsItem={addsItem}
-                  lessItem={lessItem}
+                  incrementItem={incrementItem}
+                  decrementItem={decrementItem}
                   count={count}
-                  added={added}
+                  added={inCart}
                   addButton={true}
                 />
               </div>
